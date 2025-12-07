@@ -44,10 +44,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$iota$2f$io
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$iota$2f$dapp$2d$kit$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@iota/dapp-kit/dist/esm/index.js [app-ssr] (ecmascript)");
 ;
 ;
-const DEVNET_PACKAGE_ID = "0x7503e5a5c0c864f24af9a30fa2d7b7f270a230ad451099f7d4ee3a2b22dd2bc5";
-const TESTNET_PACKAGE_ID = "";
+const DEVNET_PACKAGE_ID = "0x7c7bb7973908ae00e848621947aa36ab02e227c1fdebaf187c0d3935e70d2615";
+const TESTNET_PACKAGE_ID = "0x3e714df16456da7adb8cb8a2dbfae12271bc4af08a948ef029589f66168b3654";
 const MAINNET_PACKAGE_ID = "";
-const GAME_STATE_ID = "0x9fad23cd3df0a226656c36d42fe966d8a88f7e8872663aaf9c860b807c939dc3";
+const GAME_STATE_ID = "0x2e2978a90444bacf71f0e1c1265c425dd665163424462b73d7f9d4411f31d882";
 // Network configuration
 const { networkConfig, useNetworkVariable, useNetworkVariables } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$iota$2f$dapp$2d$kit$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createNetworkConfig"])({
     devnet: {

@@ -1974,8 +1974,7 @@ const VuaTiengVietGame = ()=>{
                             },
                             children: [
                                 "✅ Transaction: ",
-                                transactionState.hash.slice(0, 24),
-                                "...",
+                                transactionState.hash,
                                 transactionState.isConfirmed && " (Đã xác nhận)"
                             ]
                         }, void 0, true, {

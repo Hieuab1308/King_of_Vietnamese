@@ -527,7 +527,7 @@ const VuaTiengVietGame = () => {
                         border: "1px solid #4caf50"
                     }}>
                         <Text size="2" style={{ color: "#2e7d32" }}>
-                            ✅ Transaction: {transactionState.hash.slice(0, 24)}...
+                            ✅ Transaction: {transactionState.hash}
                             {transactionState.isConfirmed && " (Đã xác nhận)"}
                         </Text>
                     </div>
