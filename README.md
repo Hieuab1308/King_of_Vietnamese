@@ -1,208 +1,133 @@
-# 🇻🇳 Vua Tiếng Việt - Game Đố Chữ Blockchain
+# 🇻🇳 Vua Tiếng Việt
 
-> Game đố chữ tiếng Việt trên blockchain IOTA - **Chống gian lận 100%**, **Tự động trả thưởng**!
+> Vietnamese Word Guessing Game on IOTA Blockchain
 
-![IOTA](https://img.shields.io/badge/IOTA-Blockchain-blue)
-![Move](https://img.shields.io/badge/Move-Smart%20Contract-green)
-![Next.js](https://img.shields.io/badge/Next.js-Frontend-black)
+## 📝 Description
 
-## 🎯 Giới thiệu
+**Vua Tiếng Việt** (King of Vietnamese) is a decentralized word guessing game (dApp) built on IOTA blockchain with the following features:
 
-**Vua Tiếng Việt** là một game đố chữ phi tập trung (dApp) được xây dựng trên blockchain IOTA. Người chơi có thể tạo câu hỏi với tiền thưởng và ai đoán đúng đầu tiên sẽ nhận thưởng tự động!
+- 🔒 **Anti-cheat**: Answers are hashed and cannot be modified after question creation
+- ⚡ **Auto reward**: Correct answer → instant prize transfer
+- 🌐 **Transparent**: All transactions are public on blockchain
 
-### ✨ Điểm nổi bật
-
-| Tính năng | Mô tả |
-|-----------|-------|
-| 🔒 **Chống gian lận** | Đáp án được mã hóa (hash), không ai có thể sửa sau khi tạo câu hỏi |
-| ⚡ **Tự động trả thưởng** | Đoán đúng → Smart Contract chuyển tiền ngay lập tức |
-| 🌐 **Minh bạch** | Mọi giao dịch công khai trên blockchain |
-| 💰 **Phi tập trung** | Không cần bên thứ 3, không ai can thiệp được |
-
-## 🏗️ Kiến trúc
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      FRONTEND (Next.js)                     │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
-│  │  Tạo câu hỏi │  │  Trả lời    │  │  Xem thống kê      │ │
-│  └──────┬──────┘  └──────┬──────┘  └──────────┬──────────┘ │
-└─────────┼────────────────┼────────────────────┼─────────────┘
-          │                │                    │
-          ▼                ▼                    ▼
-┌─────────────────────────────────────────────────────────────┐
-│                 SMART CONTRACT (Move/IOTA)                  │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │  • create_question() - Tạo câu hỏi + khóa tiền thưởng│   │
-│  │  • submit_answer()   - Kiểm tra đáp án + trả thưởng  │   │
-│  │  • cancel_question() - Hủy và hoàn tiền              │   │
-│  │  • hash_answer()     - Mã hóa đáp án (keccak256)     │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-```
-
-## 🔐 Cơ chế chống gian lận
-
-```
-┌────────────────────────────────────────────────────────────┐
-│ BƯỚC 1: Tạo câu hỏi                                        │
-│                                                            │
-│   Đáp án: "con chó"  ──┐                                   │
-│   Salt:   "abc123"   ──┼──► hash() ──► "7a8b9c..."        │
-│                        │              (lưu blockchain)     │
-│                        │                                   │
-│   ⚠️ Đáp án gốc KHÔNG được lưu!                            │
-└────────────────────────────────────────────────────────────┘
-
-┌────────────────────────────────────────────────────────────┐
-│ BƯỚC 2: Trả lời                                            │
-│                                                            │
-│   Người chơi nhập: "con chó" + "abc123"                   │
-│                           │                                │
-│                           ▼                                │
-│   Contract tính: hash("con chó" + "abc123") = "7a8b9c..." │
-│                           │                                │
-│                           ▼                                │
-│   So sánh: "7a8b9c..." == "7a8b9c..." ✅ ĐÚNG!            │
-│                           │                                │
-│                           ▼                                │
-│   💰 Tự động chuyển tiền thưởng cho người thắng!          │
-└────────────────────────────────────────────────────────────┘
-```
-
-## 🚀 Cài đặt & Chạy
-
-### Yêu cầu
-- Node.js 18+
-- IOTA CLI (`iota`)
-- Ví IOTA với IOTA testnet/devnet
-
-### Cài đặt
+## 🚀 How to Run
 
 ```bash
-# Clone project
-git clone <repo-url>
-cd vua_tien_gviet
-
-# Cài dependencies
+# 1. Install dependencies
 npm install --legacy-peer-deps
 
-# Deploy smart contract
+# 2. Deploy smart contract to IOTA devnet
 npm run iota-deploy
 
-# Chạy development server
+# 3. Start the application
 npm run dev
 ```
 
-### Mở trình duyệt
-```
-http://localhost:3000
-```
+Open browser: **http://localhost:3000**
 
-## 📁 Cấu trúc dự án
+## 📁 Project Structure
 
 ```
 vua_tien_gviet/
-├── app/                          # Next.js App Router
-│   ├── layout.tsx                # Layout chính
-│   ├── page.tsx                  # Trang chủ
-│   └── globals.css               # CSS toàn cục
-├── components/                   # React Components
-│   ├── VuaTiengVietGame.tsx      # Component game chính
-│   ├── Wallet-connect.tsx        # Kết nối ví
-│   └── Provider.tsx              # IOTA Provider
-├── hooks/                        # Custom Hooks
-│   └── useVuaTiengViet.ts        # Hook tương tác contract
-├── lib/                          # Cấu hình
-│   └── config.ts                 # Package ID, Game State ID
-├── contract/                     # Smart Contract
+│
+├── app/                              # Next.js App Router (Frontend)
+│   ├── layout.tsx                    # Root layout component
+│   ├── page.tsx                      # Home page
+│   └── globals.css                   # Global styles
+│
+├── components/                       # React Components
+│   ├── VuaTiengVietGame.tsx          # Main game component
+│   ├── Wallet-connect.tsx            # IOTA wallet connection
+│   └── Provider.tsx                  # IOTA Provider wrapper
+│
+├── hooks/                            # Custom React Hooks
+│   ├── useVuaTiengViet.ts            # Hook for game contract interaction
+│   └── useContract.ts                # Base contract hook
+│
+├── lib/                              # Configuration
+│   └── config.ts                     # Package ID, Game State ID, Network config
+│
+├── contract/                         # ⭐ SMART CONTRACT (Move Language)
 │   └── vua_tien_gviet/
-│       ├── Move.toml             # Config Move
+│       ├── Move.toml                 # Move package configuration
 │       └── sources/
-│           └── vua_tien_gviet.move  # Contract chính
-└── scripts/                      # Scripts tiện ích
-    └── iota-deploy-wrapper.js    # Auto deploy
+│           └── vua_tien_gviet.move   # ← Main smart contract file
+│
+├── scripts/                          # Utility Scripts
+│   ├── iota-deploy-wrapper.js        # Auto deploy script
+│   └── iota-generate-prompt-wrapper.js
+│
+├── public/                           # Static assets
+├── package.json                      # Node.js dependencies
+├── tsconfig.json                     # TypeScript configuration
+├── next.config.ts                    # Next.js configuration
+└── README.md                         # This file
 ```
 
-## 📖 Hướng dẫn sử dụng
+## 📜 Smart Contract
 
-### 👤 Người tạo câu hỏi (Admin)
+**Location**: `contract/vua_tien_gviet/sources/vua_tien_gviet.move`
 
-1. Kết nối ví IOTA
-2. Nhấn **"➕ Tạo câu hỏi"**
-3. Điền thông tin:
-   - Câu hỏi
-   - Gợi ý (tùy chọn)
-   - Đáp án
-   - Salt (nhấn 🎲 để tạo ngẫu nhiên)
-   - Tiền thưởng (IOTA)
-4. **Lưu lại Salt** để chia sẻ cho người chơi
-5. Nhấn **"Tạo câu hỏi"**
+### Main Functions:
 
-### 🎮 Người chơi
+| Function | Description |
+|----------|-------------|
+| `create_question()` | Create question + lock reward in contract |
+| `submit_answer()` | Submit answer + receive reward if correct |
+| `cancel_question()` | Cancel question + refund (creator only) |
+| `hash_answer()` | Hash answer using keccak256 |
 
-1. Kết nối ví IOTA
-2. Xem danh sách câu hỏi đang mở
-3. Nhấn **"Trả lời"**
-4. Nhập:
-   - Đáp án
-   - Salt (được cung cấp bởi người tạo)
-5. Nếu đúng → **Nhận thưởng tự động!**
+### How It Works:
 
-## 🛠️ Smart Contract API
+```
+1. Admin creates question:
+   - Answer "dog" + Salt "abc123" → hash → Store on blockchain
+   - Reward is locked in smart contract
 
-### `create_question`
-Tạo câu hỏi mới với tiền thưởng.
+2. Player answers:
+   - Input answer + salt
+   - Contract re-hashes and compares
+   - Correct? → Auto transfer reward to winner!
+```
+
+### Contract Structs:
 
 ```move
-public fun create_question(
-    game_state: &mut GameState,
+// Game state (shared object)
+struct GameState {
+    admin: address,
+    total_questions: u64,
+    total_solved: u64,
+    total_rewards_distributed: u64
+}
+
+// Question object
+struct Question {
     question_text: vector<u8>,
     hint: vector<u8>,
-    answer_hash: vector<u8>,  // Hash của đáp án
-    reward: Coin<IOTA>,       // Tiền thưởng
-    deadline: u64,            // Thời hạn (0 = không giới hạn)
-    ctx: &mut TxContext
-)
+    answer_hash: vector<u8>,    // Hashed answer (32 bytes)
+    reward: Coin<IOTA>,         // Locked reward
+    is_active: bool,
+    creator: address,
+    winner: Option<address>
+}
 ```
 
-### `submit_answer`
-Gửi câu trả lời và nhận thưởng nếu đúng.
+## 🛠️ Tech Stack
 
-```move
-public fun submit_answer(
-    game_state: &mut GameState,
-    question: &mut Question,
-    answer: vector<u8>,       // Đáp án gốc
-    salt: vector<u8>,         // Salt
-    ctx: &mut TxContext
-)
-```
+- **Blockchain**: IOTA (Move language)
+- **Frontend**: Next.js 16, React 19, TypeScript
+- **UI**: Radix UI, TailwindCSS
+- **Wallet**: IOTA dApp Kit
+- **Hashing**: keccak256 (js-sha3)
 
-### `cancel_question`
-Hủy câu hỏi và hoàn tiền (chỉ creator).
+## 📧 Contact
 
-```move
-public fun cancel_question(
-    game_state: &GameState,
-    question: &mut Question,
-    ctx: &mut TxContext
-)
-```
-
-## 🔗 Links
-
-- [IOTA Documentation](https://wiki.iota.org/)
-- [IOTA dApp Kit](https://github.com/iotaledger/dapp-kit)
-- [Move Language](https://move-language.github.io/move/)
-- [Next.js](https://nextjs.org/)
+- **Email**: 22010104@st.phenikaa-uni.edu.vn
+- **GitHub**: [Hieuab1308](https://github.com/Hieuab1308)
 
 ## 📄 License
 
-MIT License - Tự do sử dụng và chỉnh sửa!
+MIT License
 
----
-
-<p align="center">
-  Made with ❤️ for Vietnamese community 🇻🇳
-</p>
+MIT License
