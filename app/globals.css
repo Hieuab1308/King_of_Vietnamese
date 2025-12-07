@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fef7e6;
+  --foreground: #1a1a2e;
+  --primary: #da251d;
+  --primary-light: #ff6b6b;
+  --secondary: #ffcd00;
+  --accent: #16213e;
+  --card-bg: #ffffff;
+  --card-shadow: 0 4px 20px rgba(218, 37, 29, 0.1);
+  --gradient-vn: linear-gradient(135deg, #da251d 0%, #ffcd00 100%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1a2e;
+    --foreground: #f5f5f5;
+    --card-bg: #16213e;
+    --card-shadow: 0 4px 20px rgba(255, 205, 0, 0.1);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* Vietnam theme styles */
+.vn-gradient {
+  background: var(--gradient-vn);
+}
+
+.vn-border {
+  border: 2px solid var(--primary);
+}
+
+.vn-shadow {
+  box-shadow: var(--card-shadow);
+}
+
+/* Animation */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--primary), 0 0 10px var(--secondary);
+  }
+
+  50% {
+    box-shadow: 0 0 15px var(--primary), 0 0 25px var(--secondary);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Card styles */
+.game-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(218, 37, 29, 0.1);
+  transition: all 0.3s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(218, 37, 29, 0.15);
+}
+
+/* Button styles */
+.btn-vietnam {
+  background: var(--gradient-vn);
+  color: white;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-vietnam:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(218, 37, 29, 0.4);
+}
+
+.btn-vietnam:active {
+  transform: scale(0.98);
+}
+
+/* Badge styles */
+.badge-reward {
+  background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+  color: #1a1a2e;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-active {
+  background: linear-gradient(135deg, #00c853 0%, #00e676 100%);
+  color: white;
+}
+
+.badge-closed {
+  background: linear-gradient(135deg, #757575 0%, #9e9e9e 100%);
+  color: white;
+}
+
+/* Header styles */
+.header-vietnam {
+  background: var(--gradient-vn);
+  padding: 20px;
+  border-radius: 0 0 24px 24px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-vietnam::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M30 0l30 30-30 30L0 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+
+/* Star decoration */
+.star-icon {
+  color: #ffcd00;
+  filter: drop-shadow(0 0 3px rgba(255, 205, 0, 0.5));
+}
+
+/* Question card special */
+.question-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-vn);
+  border-radius: 4px 0 0 4px;
+}
+
+/* Stats card */
+.stats-card {
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(218, 37, 29, 0.05) 100%);
+  border: 1px solid rgba(218, 37, 29, 0.2);
+}
+
+/* Input focus */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(218, 37, 29, 0.1) !important;
+}
+
+/* Dialog overlay */
+.dialog-overlay {
+  background: rgba(26, 26, 46, 0.8);
+  backdrop-filter: blur(4px);
+}
+
+/* Trophy animation */
+.trophy-bounce {
+  display: inline-block;
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Confetti effect for winner */
+.winner-card {
+  position: relative;
+  background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%);
+  border: 2px solid #ffd700;
+}
+
+/* Footer */
+.footer-vietnam {
+  text-align: center;
+  padding: 20px;
+  color: var(--primary);
+  font-size: 14px;
+  margin-top: 40px;
+}
+
+.footer-vietnam::before {
+  content: '⭐';
+  margin-right: 8px;
+}
+
+.footer-vietnam::after {
+  content: '⭐';
+  margin-left: 8px;
+}
