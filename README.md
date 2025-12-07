@@ -23,7 +23,7 @@ npm run iota-deploy
 npm run dev
 ```
 
-Open browser: **http://localhost:3000**
+Contract Address:https://explorer.iota.org/object/0x3e714df16456da7adb8cb8a2dbfae12271bc4af08a948ef029589f66168b3654?network=testnet
 
 ## 📁 Project Structure
 
